@@ -6,14 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import retrofit2.Response
 
 class DataListViewModel(private val repository: DataListRepository):ViewModel() {
     val myResponse: MutableLiveData<Response<List<DataItem>>> = MutableLiveData()
 
-    fun getListDataItem(){
+    fun getListDataItem(userId:Int){
         viewModelScope.launch {
-            val response = repository.getListItemData()
+            val response = repository.getListItemData(userId)
             myResponse.value = response
         }
     }

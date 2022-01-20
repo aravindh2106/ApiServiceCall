@@ -10,14 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class DataListFragment : Fragment() {
     private lateinit var binding: FragmentDataListBinding
     private val repository = DataListRepository()
-    val viewModel: DataListViewModel by viewModels { DataListViewModelFactory(repository) }
+    private val viewModel: DataListViewModel by viewModels { DataListViewModelFactory(repository) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,7 +27,7 @@ class DataListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getListDataItem()
+        viewModel.getListDataItem(2)
         subscribeUI()
 
     }

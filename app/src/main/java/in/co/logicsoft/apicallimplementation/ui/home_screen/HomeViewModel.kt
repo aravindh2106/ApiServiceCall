@@ -7,26 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import retrofit2.Response
 
-class HomeViewModel(private val repository:HomeFragmentRepository):ViewModel() {
-val myResponse:MutableLiveData<Response<DataItem>> = MutableLiveData()
-    fun getSingleItem(){
-    viewModelScope.launch {
-        val response = repository.getSingleData()
-        myResponse.value = response
-    }
-}
-   fun pushdataItem(dataItem: DataItem){
-       viewModelScope.launch {
-           val response = repository.pushItem(dataItem)
-           myResponse.value = response
-       }
-
-    }
-    fun pushDataItem2(userId:Int,id:Int,title:String,body:String){
+class HomeViewModel(private val repository: HomeFragmentRepository) : ViewModel() {
+    val myResponse: MutableLiveData<Response<DataItem>> = MutableLiveData()
+    fun getSingleItem(id: Int) {
         viewModelScope.launch {
-            val response = repository.pushItem2(userId, id, title, body)
+            val response = repository.getSingleData(id)
             myResponse.value = response
         }
     }

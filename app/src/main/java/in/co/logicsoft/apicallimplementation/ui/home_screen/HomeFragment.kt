@@ -1,6 +1,7 @@
 package `in`.co.logicsoft.apicallimplementation.ui.home_screen
 
 import `in`.co.logicsoft.apicallimplementation.databinding.FragmentHomeBinding
+import `in`.co.logicsoft.apicallimplementation.model.DataItem
 import `in`.co.logicsoft.apicallimplementation.repository.HomeFragmentRepository
 import android.os.Bundle
 import android.util.Log
@@ -10,14 +11,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val repository = HomeFragmentRepository()
-    val viewModel: HomeViewModel by viewModels { HomeViewModelFactory(repository) }
+    private val viewModel: HomeViewModel by viewModels { HomeViewModelFactory(repository) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,31 +36,36 @@ class HomeFragment : Fragment() {
             val action = HomeFragmentDirections.actionHomeFragmentToDataListFragment()
             findNavController().navigate(action)
         }
-        //   viewModel.getSingleItem()
-        //  val myDataItem = DataItem(2,2,"Aravindh","Android developer")
-        viewModel.pushDataItem2(2, 2, "Aravindh", "Android developer")
-        subscribeUI()
+        binding.singleDataBtn.setOnClickListener {
+            viewModel.getSingleItem(2)
+            subscribeUI()
+        }
+
     }
 
     private fun subscribeUI() {
         viewModel.myResponse.observe(viewLifecycleOwner, Observer { response ->
             if (response.isSuccessful) {
-                Log.d("response", response.body().toString())
-                Log.d("response", response.code().toString())
-                Log.d("response", response.message())
-                /*val stringBuilder = StringBuilder()
-                 val responseBody = response.body()!!
-                 stringBuilder.append(responseBody.id)
-                 stringBuilder.append("\n")
-                 stringBuilder.append(responseBody.body)
-                 stringBuilder.append("\n")
-                 binding.singleDataTxt.text = stringBuilder*/
                 binding.singleDataTxt.text = response.body().toString()
             } else {
                 Log.d("response", response.errorBody().toString())
 
             }
         })
+            /*response.enqueue(object:Callback<DataItem>{
+                override fun onResponse(call: Call<DataItem>, response: Response<DataItem>) {
+                    if (response.isSuccessful){
+                        binding.singleDataTxt.text = response.body().toString()
+                    }
+                }
+
+                override fun onFailure(call: Call<DataItem>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+*/
+
+
+
 
     }
 }
