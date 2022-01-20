@@ -5,13 +5,13 @@
 
     <data>
 
-      <!--  <variable
+        <variable
             name="userId"
-            type="Integer" />
+            type="String" />
 
         <variable
-            name="id"
-            type="Integer" />-->
+            name="ids"
+            type="String" />
 
         <variable
             name="title"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="{userId.toString()}"
+            android:text="@{userId}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="{id.toString()}"
+            android:text="@{ids}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView"

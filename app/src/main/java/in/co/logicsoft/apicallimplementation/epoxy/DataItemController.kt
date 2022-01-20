@@ -10,8 +10,9 @@ class DataItemController():TypedEpoxyController<List<DataItem>>() {
     override fun buildModels(data: List<DataItem>?) {
         data?.forEachIndexed { index, dataItem ->
             rowItem {
-               // userId(dataItem.userId)
-                id(dataItem.id)
+                id("$index")
+                userId(dataItem.userId.toString())
+                ids(dataItem.id.toString())
                 title(dataItem.title)
                 body(dataItem.body)
             }

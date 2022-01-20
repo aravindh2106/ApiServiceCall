@@ -4,12 +4,14 @@ import `in`.co.logicsoft.apicallimplementation.databinding.FragmentDataListBindi
 import `in`.co.logicsoft.apicallimplementation.epoxy.DataItemController
 import `in`.co.logicsoft.apicallimplementation.repository.DataListRepository
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 
 
 class DataListFragment : Fragment() {
@@ -31,10 +33,13 @@ class DataListFragment : Fragment() {
 
     }
     private fun subscribeUI(){
-        viewModel.myResponse.observe(viewLifecycleOwner, Observer {response->
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        viewModel.myResponse.observe(viewLifecycleOwner, { response->
             if (response.isSuccessful){
+                Log.d("AP", response.body().toString())
                 val controller = DataItemController()
                 controller.setData(response.body())
+                binding.recyclerview.adapter = controller.adapter
             }
 
         })

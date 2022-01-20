@@ -23,9 +23,9 @@ object ServiceBuilder {
         .client(okHttp.build())
     //create retrofit instance
     private val retrofit = builder.build()
-
-//    fun <T> buildService(serviceType:Class<T>):T{
-//        return retrofit.create(serviceType)
-//    }
+/*
+   fun <T> buildService(serviceType:Class<T>):T{
+       return retrofit.create(serviceType)
+   }*/
     val api:ApiInterface = retrofit.create(ApiInterface::class.java)
 }
