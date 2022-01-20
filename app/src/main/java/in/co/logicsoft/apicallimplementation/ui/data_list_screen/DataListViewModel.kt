@@ -11,6 +11,7 @@ import retrofit2.Response
 class DataListViewModel(private val repository: DataListRepository):ViewModel() {
     val myResponse: MutableLiveData<Response<List<DataItem>>> = MutableLiveData()
 
+
     fun getListDataItem(){
         viewModelScope.launch {
             val response = repository.getListItemData()

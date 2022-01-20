@@ -2,7 +2,9 @@ package `in`.co.logicsoft.apicallimplementation.ui.data_list_screen
 
 import `in`.co.logicsoft.apicallimplementation.databinding.FragmentDataListBinding
 import `in`.co.logicsoft.apicallimplementation.epoxy.DataItemController
+import `in`.co.logicsoft.apicallimplementation.model.DataItem
 import `in`.co.logicsoft.apicallimplementation.repository.DataListRepository
+import `in`.co.logicsoft.apicallimplementation.ui.home_screen.HomeFragmentDirections
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 
@@ -41,7 +44,7 @@ class DataListFragment : Fragment() {
                 controller.setData(response.body())
                 binding.recyclerview.adapter = controller.adapter
             }
-
         })
     }
+
 }

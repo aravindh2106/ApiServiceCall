@@ -8,11 +8,14 @@ class HomeFragmentRepository {
     suspend fun getSingleData():Response<DataItem>{
         return ServiceBuilder.api.getOneItem()
     }
-    suspend fun pushItem(dataItem:DataItem):Response<DataItem>{
-        return ServiceBuilder.api.pushItem(dataItem)
+    suspend fun createItem(dataItem:DataItem):Response<DataItem>{
+        return ServiceBuilder.api.createData(dataItem)
     }
-    suspend fun pushItem2(userId:Int,id:Int,title:String,body:String):Response<DataItem>{
-        return ServiceBuilder.api.pushItem2(userId, id, title, body)
+    suspend fun createItem2(userId:Int,id:Int,title:String,body:String):Response<DataItem>{
+        return ServiceBuilder.api.createData2(userId, id, title, body)
 
+    }
+    suspend fun updateItem(id:Int,dataItem:DataItem):Response<DataItem>{
+        return ServiceBuilder.api.updateItem(id, dataItem)
     }
 }
