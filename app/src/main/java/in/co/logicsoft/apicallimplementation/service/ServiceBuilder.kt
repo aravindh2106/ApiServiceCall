@@ -17,8 +17,8 @@ object ServiceBuilder {
     private val headerInterceptor = Interceptor { chain ->
         var request = chain.request()
         request = request.newBuilder()
-            .addHeader("Content-Type","application/json")
-            .addHeader("X-platform","Android")
+            .addHeader("Content-Type", "application/json")
+            .addHeader("X-platform", "Android")
             .build()
         val response = chain.proceed(request)
         response
